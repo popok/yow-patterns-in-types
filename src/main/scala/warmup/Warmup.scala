@@ -173,9 +173,15 @@ object Warmup {
    * ~~~ library hint: use can just use List[A]#sorted to sort the list before you start.
    * ~~~ library hint: List[A]#min and List#max exist.
    */
-  def ranges(xs: List[Int]): List[(Int, Int)] = ???
-//    xs.sorted match {
-//      case Nil => Nil
-//      case head :: tail if ()=>
-//    }
+  def ranges(xs: List[Int]): List[(Int, Int)] = {
+    def loop(in: List[Int], min:Int, max:Int): List[(Int, Int)] =
+    in match {
+      case head :: tail if head - max <= 1  => loop(tail, min, head)
+      case head :: tail if head - max > 1 => (min, max) :: loop(tail, head, head)
+      case Nil => (min, max) :: Nil
+    }
+
+    loop(xs.sorted, xs.min,  xs.min)
+  }
+
 }
