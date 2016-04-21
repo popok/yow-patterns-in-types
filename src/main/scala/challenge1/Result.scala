@@ -46,7 +46,10 @@ sealed trait Result[A] {
   def fold[X](
     fail: Error => X,
     ok: A => X
-  ): X = ???
+  ): X = this match {
+    case Ok(value) => ok(value)
+    case Fail(error) => fail(error)
+  }
 
   /*
    * Exercise 1.2:

@@ -81,7 +81,10 @@ object Warmup {
    * resX: List[Int] = List(1, 2, 3, 4, 5, 6, 7, 8)
    */
   def append[A](x: List[A], y: List[A]): List[A] =
-    ???
+    x match {
+      case Nil => y
+      case head :: xs => head :: append(xs, y)
+    }
 
   /*
    * Exercise: 0.2:
@@ -100,7 +103,10 @@ object Warmup {
    *     not infer what you mean.
    */
   def map[A, B](xs: List[A])(f: A => B): List[B] =
-    ???
+    xs match {
+      case Nil => Nil
+      case head :: xr => f(head) :: map(xr)(f)
+    }
 
   /*
    * Exercise: 0.3:
@@ -112,7 +118,11 @@ object Warmup {
    * resX: List[Int] = List(1, 2)
    */
   def filter[A](xs: List[A])(p: A => Boolean): List[A] =
-    ???
+      xs match {
+        case Nil => Nil
+        case head :: xr if p(head) => head :: filter(xr)(p)
+        case head :: xr => filter(xr)(p)
+      }
 
   /*
    * Exercise: 0.4:
@@ -132,8 +142,17 @@ object Warmup {
    *     Type annotations are required when scala can
    *     not infer what you mean.
    */
-  def reverse[A](xs: List[A]): List[A] =
-    ???
+
+
+  def reverse[A](xs: List[A]): List[A] = {
+    def loop(in: List[A], out: List[A]): List[A] =
+      in match {
+        case Nil => out
+        case head :: tail => loop (tail, head :: out)
+      }
+    loop(xs, Nil)
+  }
+
 
   /*
    * *Challenge* Exercise: 0.5:
@@ -154,6 +173,9 @@ object Warmup {
    * ~~~ library hint: use can just use List[A]#sorted to sort the list before you start.
    * ~~~ library hint: List[A]#min and List#max exist.
    */
-  def ranges(xs: List[Int]): List[(Int, Int)] =
-    ???
+  def ranges(xs: List[Int]): List[(Int, Int)] = ???
+//    xs.sorted match {
+//      case Nil => Nil
+//      case head :: tail if ()=>
+//    }
 }

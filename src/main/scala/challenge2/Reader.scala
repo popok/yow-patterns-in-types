@@ -20,7 +20,7 @@ case class Reader[R, A](run: R => A) {
    * Two readers are equal if for all inputs, the same result is produced.
    */
   def map[B](f: A => B): Reader[R, B] =
-    ???
+  ???
 
   /*
    * Exercise 2.2:
